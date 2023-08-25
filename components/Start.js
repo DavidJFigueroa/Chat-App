@@ -8,14 +8,31 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
   Platform,
+  Alert,
 } from "react-native";
-
-import SearchIcon from "../assets/icon.svg";
+import {getAuth, signInAnonymously} from "firebase/auth";
+// import SearchIcon from "../assets/icon.svg";
 
 const Start = ({navigation}) => {
+  const auth = getAuth();
   const [name, setName] = useState("");
   const [color, setColor] = useState("");
   const [selectedColor, setSelectedColor] = useState("");
+
+  const signInUser = () => {
+    signInAnonymously(auth)
+      .then((result) => {
+        navigation.navigate("Chat", {
+          userID: result.user.uid,
+          name: name,
+          color: color,
+        });
+        Alert.alert("Signed in Successfully!");
+      })
+      .catch((error) => {
+        Alert.alert("Unable to sign in, try later again.");
+      });
+  };
 
   const changeColor = (color, selectedColor) => {
     setColor(color);
@@ -32,7 +49,7 @@ const Start = ({navigation}) => {
         <View></View>
         <View style={styles.chatContainer}>
           <View style={styles.searchContainer}>
-            <SearchIcon style={styles.searchIcon} width={30} height={30} />
+            {/* <SearchIcon style={styles.searchIcon} width={30} height={30} /> */}
             <TextInput
               style={styles.textInput}
               value={name}
@@ -81,9 +98,7 @@ const Start = ({navigation}) => {
           </View>
           <TouchableOpacity
             style={styles.button}
-            onPress={() =>
-              navigation.navigate("Chat", {name: name, color: color})
-            }
+            onPress={signInUser}
             accessible={true}
             accessibilityLabel="Start Chatting"
             accessibilityHint="Lets you go to the chat screen."
