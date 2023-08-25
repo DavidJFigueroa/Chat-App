@@ -6,7 +6,8 @@ import {
   TextInput,
   ImageBackground,
   TouchableOpacity,
-  Image,
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 
 import SearchIcon from "../assets/icon.svg";
@@ -28,6 +29,7 @@ const Start = ({navigation}) => {
         resizeMode="cover"
         style={styles.image}>
         <Text style={styles.title}>Chat App</Text>
+        <View></View>
         <View style={styles.chatContainer}>
           <View style={styles.searchContainer}>
             <SearchIcon style={styles.searchIcon} width={30} height={30} />
@@ -89,6 +91,12 @@ const Start = ({navigation}) => {
             <Text style={styles.buttonText}>Start Chatting</Text>
           </TouchableOpacity>
         </View>
+        {Platform.OS === "android" ? (
+          <KeyboardAvoidingView behavior="height" />
+        ) : null}
+        {Platform.OS === "ios" ? (
+          <KeyboardAvoidingView behavior="padding" />
+        ) : null}
       </ImageBackground>
     </View>
   );
@@ -151,6 +159,9 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
+  },
+  selectedColor: {
+    borderColor: "#555",
   },
   button: {
     alignItems: "center",
