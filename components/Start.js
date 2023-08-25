@@ -9,6 +9,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   Alert,
+  ScrollView,
 } from "react-native";
 import {getAuth, signInAnonymously} from "firebase/auth";
 // import SearchIcon from "../assets/icon.svg";
@@ -136,20 +137,23 @@ const styles = StyleSheet.create({
     fontSize: 45,
     fontWeight: "600",
     color: "#FFFFFF",
-    marginBottom: 200,
+    marginBottom: 50,
   },
   chatContainer: {
     backgroundColor: "white",
     width: "88%",
-    height: "44%",
+    // height: "44%",
+    minHeight: "60%",
     justifyContent: "center",
     alignItems: "center",
+    marginBottom: 30,
   },
   searchContainer: {
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#fff",
+    marginBottom: 20,
   },
   searchIcon: {
     position: "absolute",
@@ -169,6 +173,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     margin: 20,
+    marginBottom: 50,
   },
   colorButton: {
     width: 40,
