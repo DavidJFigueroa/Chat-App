@@ -12,7 +12,7 @@ import {
   ScrollView,
 } from "react-native";
 import {getAuth, signInAnonymously} from "firebase/auth";
-// import SearchIcon from "../assets/icon.svg";
+import SearchIcon from "../assets/icon.svg";
 
 const Start = ({navigation}) => {
   const auth = getAuth();
@@ -50,7 +50,7 @@ const Start = ({navigation}) => {
         <View></View>
         <View style={styles.chatContainer}>
           <View style={styles.searchContainer}>
-            {/* <SearchIcon style={styles.searchIcon} width={30} height={30} /> */}
+            <SearchIcon style={styles.searchIcon} width={30} height={30} />
             <TextInput
               style={styles.textInput}
               value={name}
