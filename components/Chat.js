@@ -40,8 +40,24 @@ const Chat = ({route, navigation, db}) => {
     };
   }, []);
 
-  const onSend = (newMessages) => {
-    addDoc(db, "messages", newMessages[0]);
+  // const onSend = (newMessages) => {
+  //   addDoc(db, "messages", newMessages[0]);
+  // };
+
+  const onSend = async (newMessages) => {
+    const message = newMessages[0]; // Get the first message in the array
+    try {
+      await addDoc(collection(db, "messages"), {
+        text: message.text,
+        createdAt: message.createdAt,
+        user: {
+          _id: message.user._id,
+          name: message.user.name,
+        },
+      });
+    } catch (error) {
+      console.error("Error sending message:", error);
+    }
   };
 
   const renderBubble = (props) => {
