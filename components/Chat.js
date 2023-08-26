@@ -47,7 +47,8 @@ const Chat = ({route, navigation, db}) => {
   const onSend = async (newMessages) => {
     const message = newMessages[0]; // Get the first message in the array
     try {
-      await addDoc(collection(db, "messages"), {
+      await addDoc(collection(db, "messages", newMessages[0]), {
+        _id: message.id,
         text: message.text,
         createdAt: message.createdAt,
         user: {
