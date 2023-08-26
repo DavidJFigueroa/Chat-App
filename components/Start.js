@@ -18,7 +18,12 @@ const Start = ({navigation}) => {
   const auth = getAuth();
   const [name, setName] = useState("");
   const [color, setColor] = useState("");
-  const [selectedColor, setSelectedColor] = useState("");
+  const [isPressed, setIsPressed] = useState({
+    border1: false,
+    border2: false,
+    border3: false,
+    border3: false,
+  });
 
   const signInUser = () => {
     signInAnonymously(auth)
@@ -35,9 +40,14 @@ const Start = ({navigation}) => {
       });
   };
 
-  const changeColor = (color, selectedColor) => {
+  const changeColor = (color) => {
     setColor(color);
-    setSelectedColor(selectedColor);
+    setIsPressed({
+      color1: color === "#090C08",
+      color2: color === "#474056",
+      color3: color === "#8A95A5",
+      color4: color === "#B9C6AE",
+    });
   };
 
   return (
@@ -63,34 +73,41 @@ const Start = ({navigation}) => {
           <View style={styles.colorButtonContainer}>
             <TouchableOpacity
               style={[
-                styles.colorButton,
                 {backgroundColor: "#090C08"},
-                selectedColor === "#090C08" && {
-                  borderColor: "#black",
-                  borderWidth: 5,
-                },
+                isPressed.color1 ? styles.isPressed : styles.colorButton,
               ]}
               accessible={true}
               accessibilityLabel="Choose color"
               accessibilityHint="Lets you choose background color of the chat screen."
               accessibilityRole="button"
-              onPress={() => changeColor("#090C08")}></TouchableOpacity>
+              onPress={() => {
+                changeColor("#090C08");
+              }}></TouchableOpacity>
             <TouchableOpacity
-              style={[styles.colorButton, {backgroundColor: "#474056"}]}
+              style={[
+                {backgroundColor: "#474056"},
+                isPressed.color2 ? styles.isPressed : styles.colorButton,
+              ]}
               accessible={true}
               accessibilityLabel="Choose color"
               accessibilityHint="Lets you choose background color of the chat screen."
               accessibilityRole="button"
               onPress={() => changeColor("#474056")}></TouchableOpacity>
             <TouchableOpacity
-              style={[styles.colorButton, {backgroundColor: "#8A95A5"}]}
+              style={[
+                {backgroundColor: "#8A95A5"},
+                isPressed.color3 ? styles.isPressed : styles.colorButton,
+              ]}
               accessible={true}
               accessibilityLabel="Choose color"
               accessibilityHint="Lets you choose background color of the chat screen."
               accessibilityRole="button"
               onPress={() => changeColor("#8A95A5")}></TouchableOpacity>
             <TouchableOpacity
-              style={[styles.colorButton, {backgroundColor: "#B9C6AE"}]}
+              style={[
+                {backgroundColor: "#B9C6AE"},
+                isPressed.color4 ? styles.isPressed : styles.colorButton,
+              ]}
               accessible={true}
               accessibilityLabel="Choose color"
               accessibilityHint="Lets you choose background color of the chat screen."
@@ -176,12 +193,16 @@ const styles = StyleSheet.create({
     marginBottom: 50,
   },
   colorButton: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
+    width: 50,
+    height: 50,
+    borderRadius: 25,
   },
-  selectedColor: {
-    borderColor: "#555",
+  isPressed: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    borderColor: "#fca7f4",
+    borderWidth: 5,
   },
   button: {
     alignItems: "center",

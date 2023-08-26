@@ -40,10 +40,6 @@ const Chat = ({route, navigation, db}) => {
     };
   }, []);
 
-  // const onSend = (newMessages) => {
-  //   addDoc(db, "messages", newMessages[0]);
-  // };
-
   const onSend = async (newMessages) => {
     const message = newMessages[0]; // Get the first message in the array
     try {
