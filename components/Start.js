@@ -9,7 +9,6 @@ import {
   KeyboardAvoidingView,
   Platform,
   Alert,
-  ScrollView,
 } from "react-native";
 import {getAuth, signInAnonymously} from "firebase/auth";
 import SearchIcon from "../assets/icon.svg";
