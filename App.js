@@ -4,13 +4,18 @@ import {createNativeStackNavigator} from "@react-navigation/native-stack";
 const Stack = createNativeStackNavigator();
 
 import {initializeApp} from "firebase/app";
-import {getFirestore, disableNetwork, enableNetwork} from "firebase/firestore";
+import {
+  getFirestore,
+  initializeFirestore,
+  disableNetwork,
+  enableNetwork,
+} from "firebase/firestore";
 
 import Start from "./components/Start";
 import Chat from "./components/Chat";
 import {useNetInfo} from "@react-native-community/netinfo";
 import {useEffect} from "react";
-
+import {getStorage} from "firebase/storage";
 import {Alert, LogBox} from "react-native";
 LogBox.ignoreLogs(["AsyncStorage has been extracted from"]);
 
@@ -30,6 +35,8 @@ const App = () => {
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
+  const storage = getStorage(app);
+
   useEffect(() => {
     if (connectionStatus.isConnected === false) {
       Alert.alert("Connection Lost!!");
@@ -48,6 +55,7 @@ const App = () => {
             <Chat
               isConnected={connectionStatus.isConnected}
               db={db}
+              storage={storage}
               {...props}
             />
           )}

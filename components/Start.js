@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
     minHeight: "60%",
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: 30,
+    marginBottom: 20,
   },
   searchContainer: {
     flexDirection: "row",
